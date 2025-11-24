@@ -1,0 +1,20 @@
+canadagoose/
+│
+├─ main.py              # entry point
+├─ config.py            # game constants & settings
+├─ game.py              # Game class + state machine
+├─ sprites.py           # Skier, Tree, Rock, Rescuee, Flag 等 sprite classes
+├─ highscore.py         # load/save high score with error handling
+├─ ui.py                # draw menu / game over screen / simple buttons
+├─ utils.py             # helper functions (load_image, etc.)
+│
+├─ assets/
+│   ├─ images/          # skier.png, tree.png, rock.png, flag.png ...
+│   └─ sounds/          # optional
+│
+├─ tests/
+│   ├─ test_highscore.py
+│   └─ test_utils.py    # or others
+│
+├─ README.md
+└─ requirements.txt
