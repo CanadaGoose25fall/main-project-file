@@ -26,6 +26,7 @@ We organized the code into separate modules to keep it clean and readable:
 - `background.py` - Background rendering (mountains, snow, lane markers)
 - `tests/` - Unit tests for the high score module
 
+
 ## How to Run
 
 1. Make sure you have Python 3.10+ installed
