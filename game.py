@@ -23,7 +23,7 @@ from config import (
     RESCUE_BASE_SPAWN_RATE,
     FONT_NAME,
 )
-from highscore import load_high_scores, save_high_score, is_new_high_score
+from highscore import load_high_score, save_high_score, is_new_high_score
 from sprites import Skier, Obstacle, Flag, Rescuee
 from game_screens import draw_menu, draw_tutorial, draw_game_over
 from background import draw_scrolling_background
@@ -369,7 +369,7 @@ class Game:
     def game_over_loop(self) -> None:
         """Handle events and drawing for game over screen."""
         is_high = is_new_high_score(self.score)
-        scores = load_high_scores(limit=5)
+        high_score = load_high_score()
 
         in_game_over = True
         while in_game_over and self.running and self.state == "GAME_OVER":
@@ -397,5 +397,5 @@ class Game:
                 self.score,
                 self.rescued_count,
                 is_high,
-                scores
+                high_score
             )
