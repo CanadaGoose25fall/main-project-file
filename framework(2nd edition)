@@ -1,0 +1,15 @@
+canadagoose/ 
+│ 
+├── main.py #  
+├── game.py #  
+├── ui_helpers.py  
+├── game_screens.py  
+├── background.py 
+├── sprites.py  
+├── config.py  
+├── highscore.py  
+├── highscores.txt  
+│ 
+└── tests/ 
+    ├── __init__.py 
+    └── test_highscore.py
