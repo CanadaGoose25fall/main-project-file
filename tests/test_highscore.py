@@ -2,33 +2,52 @@
 
 from pathlib import Path
 
-from highscore import load_high_scores, save_high_score, is_new_high_score
+from highscore import load_high_score, save_high_score, is_new_high_score
 
 
-def test_empty_file_returns_empty_list(tmp_path) -> None:
-    """When the scores file does not exist, load_high_scores should return an empty list."""
-    path = tmp_path / "scores.txt"
-    scores = load_high_scores(path=path)
-    assert scores == []
+def test_empty_file_returns_zero(tmp_path) -> None:
+    """When the scores file does not exist, load_high_score should return 0."""
+    path = tmp_path / "score.txt"
+    score = load_high_score(path=path)
+    assert score == 0
 
 
-def test_save_and_load_scores_sorted(tmp_path) -> None:
-    """Scores saved through save_high_score should be stored in descending order."""
-    path = tmp_path / "scores.txt"
+def test_save_and_load_score(tmp_path) -> None:
+    """A saved score should be retrievable."""
+    path = tmp_path / "score.txt"
 
-    save_high_score(50, path=path)
-    save_high_score(10, path=path)
     save_high_score(100, path=path)
+    score = load_high_score(path=path)
+    assert score == 100
 
-    scores = load_high_scores(limit=3, path=path)
-    assert scores == [100, 50, 10]
+
+def test_only_saves_higher_score(tmp_path) -> None:
+    """Only higher scores should be saved."""
+    path = tmp_path / "score.txt"
+
+    save_high_score(100, path=path)
+    save_high_score(50, path=path)  
+    
+    score = load_high_score(path=path)
+    assert score == 100  
+
+    save_high_score(200, path=path)  
+    score = load_high_score(path=path)
+    assert score == 200
 
 
 def test_is_new_high_score(tmp_path) -> None:
-    """is_new_high_score should detect whether a score beats existing values."""
-    path = tmp_path / "scores.txt"
-    save_high_score(30, path=path)
-    save_high_score(60, path=path)
+    """is_new_high_score should detect whether a score beats the existing high score."""
+    path = tmp_path / "score.txt"
+    
+    # No existing score, any score is a high score
+    assert is_new_high_score(10, path=path) is True
+    
+    save_high_score(100, path=path)
+    
+    assert is_new_high_score(200, path=path) is True
+    assert is_new_high_score(50, path=path) is False
+    assert is_new_high_score(100, path=path) is False  
 
     assert is_new_high_score(100, path=path) is True
     assert is_new_high_score(10, path=path) is False
