@@ -1,9 +1,9 @@
-"""Utility functions for loading and saving high scores to a text file."""
+"""Utility functions for loading and saving high score to a text file."""
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 from config import HIGH_SCORE_FILE
 
@@ -11,75 +11,61 @@ from config import HIGH_SCORE_FILE
 DEFAULT_HIGH_SCORE_PATH = Path(HIGH_SCORE_FILE)
 
 
-def load_high_scores(limit: int = 5, path: Optional[Path] = None) -> List[int]:
-    """Load high scores from a text file.
-
-    The file is expected to contain one integer score per line.
+def load_high_score(path: Optional[Path] = None) -> int:
+    """Load the highest score from a text file.
 
     Args:
-        limit: Maximum number of scores to return.
         path: Optional path override for unit testing.
 
     Returns:
-        A list of scores sorted from highest to lowest.
+        The highest score, or 0 if no score exists.
     """
     used_path = path or DEFAULT_HIGH_SCORE_PATH
     if not used_path.exists():
-        return []
-    scores: List[int] = []
+        return 0
+    
     try:
         with used_path.open("r", encoding="utf-8") as file:
-            for line in file:
-                stripped = line.strip()
-                if not stripped:
-                    continue
+            content = file.read().strip()
+            if content:
                 try:
-                    value = int(stripped)
+                    return int(content)
                 except ValueError:
-                    continue
-                scores.append(value)
+                    return 0
     except OSError:
-        return []
+        return 0
+    
+    return 0
 
-    scores.sort(reverse=True)
-    return scores[:limit]
 
-
-def save_high_score(score: int, limit: int = 5, path: Optional[Path] = None) -> None:
-    """Append a new score to the high-score file and keep only the best ones.
+def save_high_score(score: int, path: Optional[Path] = None) -> None:
+    """Save a new high score if it's higher than the existing one.
 
     Args:
-        score: The score to store.
-        limit: Maximum number of scores to keep.
+        score: The score to potentially store.
         path: Optional path override for unit testing.
     """
     used_path = path or DEFAULT_HIGH_SCORE_PATH
-    scores = load_high_scores(limit=limit, path=used_path)
-    scores.append(score)
-    scores.sort(reverse=True)
-    scores = scores[:limit]
-
-    try:
-        used_path.parent.mkdir(parents=True, exist_ok=True)
-        with used_path.open("w", encoding="utf-8") as file:
-            for value in scores:
-                file.write(f"{value}\n")
-    except OSError:
-        # Failing to write high scores should not crash the game.
-        return
+    current_high = load_high_score(path=used_path)
+    
+    if score > current_high:
+        try:
+            used_path.parent.mkdir(parents=True, exist_ok=True)
+            with used_path.open("w", encoding="utf-8") as file:
+                file.write(f"{score}\n")
+        except OSError:
+            return
 
 
 def is_new_high_score(score: int, path: Optional[Path] = None) -> bool:
-    """Check whether the given score is higher than existing stored scores.
+    """Check whether the given score is higher than the existing high score.
 
     Args:
         score: Score to compare.
         path: Optional path override for unit testing.
 
     Returns:
-        True if the score is a new high score or if no scores are stored yet.
+        True if the score is a new high score.
     """
-    scores = load_high_scores(path=path)
-    if not scores:
-        return True
-    return score > max(scores)
+    current_high = load_high_score(path=path)
+    return score > current_high
