@@ -20,7 +20,7 @@ We organized the code into separate modules to keep it clean and readable:
 - `game.py` - Main game loop and state management (menu, tutorial, playing, game over)
 - `sprites.py` - All sprite classes (Skier, Obstacle, Flag, Rescuee)
 - `config.py` - Game settings and constants (colors, speeds, difficulty levels)
-- `highscore.py` - Functions to save and load high scores
+- `highscore.py` - Functions to save and load high score
 - `ui_helpers.py` - Helper functions for drawing text and tutorial sprites
 - `game_screens.py` - Drawing functions for menu, tutorial, and game over screens
 - `background.py` - Background rendering (mountains, snow, lane markers)
