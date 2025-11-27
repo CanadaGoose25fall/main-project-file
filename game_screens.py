@@ -14,7 +14,7 @@ from config import (
     POINTS_PER_FLAG,
     POINTS_PER_RESCUE,
 )
-from highscore import load_high_scores
+from highscore import load_high_score
 from ui_helpers import (
     draw_text_center,
     draw_text_topleft,
@@ -81,11 +81,11 @@ def draw_menu(screen: pygame.Surface, fonts: dict) -> None:
         (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60),
     )
 
-    scores = load_high_scores(limit=5)
-    if scores:
+    high_score = load_high_score()
+    if high_score > 0:
         draw_text_center(
             screen,
-            "Top scores: " + ", ".join(str(s) for s in scores),
+            f"High Score: {high_score}",
             fonts['small'],
             WHITE,
             (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 130),
@@ -219,7 +219,7 @@ def draw_game_over(
     score: int,
     rescued_count: int,
     is_high_score: bool,
-    scores: list
+    high_score: int
 ) -> None:
     """Draw the game-over screen."""
     screen.fill(DARK_GRAY)
@@ -233,7 +233,7 @@ def draw_game_over(
     )
     draw_text_center(
         screen,
-        f"Final score: {score}",
+        f"Your score: {score}",
         fonts['medium'],
         WHITE,
         (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4 + 60),
@@ -249,19 +249,18 @@ def draw_game_over(
     if is_high_score:
         draw_text_center(
             screen,
-            "New high score!",
+            "New High Score!",
             fonts['medium'],
             (255, 215, 0),
             (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4 + 160),
         )
-
-    if scores:
+    else:
         draw_text_center(
             screen,
-            "Top scores: " + ", ".join(str(s) for s in scores),
+            f"High Score: {high_score}",
             fonts['small'],
-            WHITE,
-            (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2),
+            GRAY,
+            (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4 + 160),
         )
 
     draw_text_center(
@@ -273,4 +272,3 @@ def draw_game_over(
     )
 
     pygame.display.flip()
-    
