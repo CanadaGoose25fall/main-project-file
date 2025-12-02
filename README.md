@@ -41,6 +41,10 @@ pip install pygame pytest
 python3 main.py
 ```
 
+### 3: or Just:
+Open the main.py and click run!
+
+
 ## Controls
 
 **Main Menu:**
