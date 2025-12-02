@@ -6,7 +6,18 @@ from typing import Dict
 
 @dataclass(frozen=True)
 class DifficultySettings:
-    """Simple container for difficulty-related settings."""
+    """Simple container for difficulty-related settings.
+    
+    Attributes:
+        name: str
+            Display the name of the difficulty level.
+        scroll_speed: float
+            The speed at which the background scrolls.
+        obstacle_spawn_rate: int
+            Number of frames between obstacle spawns.
+        flag_spawn_rate: int
+            Number of frames between flag spawns.    
+    """
 
     name: str
     scroll_speed: float
