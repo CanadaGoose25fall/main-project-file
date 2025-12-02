@@ -41,7 +41,7 @@ pip install pygame pytest
 python3 main.py
 ```
 
-3: or Just:
+Or just:
 Open the main.py and click run!
 
 
