@@ -2,8 +2,9 @@
 
 A simple 2D skiing game built with Python and Pygame for our programming course project.
 
-## Designers of Game: Yuan Ma， Junjia Zeng
+## Designers of Game
 
+Yuan Ma， Junjia Zeng
 
 ## What This Game Does
 
@@ -64,7 +65,7 @@ Open the main.py and click run!
 - `ESC` to return to menu
 
 **Game Over Screen:**
-- `R` to restart with same difficulty
+- `R` to restart with the same difficulty
 - `M` to return to main menu
 - `ESC` to quit
 
@@ -77,7 +78,7 @@ pytest
 
 ## Design Decisions
 
-We used object-oriented programming with Pygame sprites to keep the code organized. We split the large game file into smaller modules so each file has a clear purpose. All game parameters are centralized in `config.py` so we can easily adjust difficulty and scoring without touching the main game logic.
+We utilized object-oriented programming with Pygame sprites to maintain code organization. We split the large game file into smaller modules so each file has a clear purpose. All game parameters are centralized in `config.py`, allowing us to easily adjust difficulty and scoring without affecting the main game logic.
 
 The graphics are simple shapes drawn with Pygame - no external image files needed. We added a tutorial screen so players understand what each game element does before they start playing.
 
@@ -89,6 +90,14 @@ This project helped us practice:
 - Organizing code into modules
 - Writing unit tests
 - Managing game state and events
+
+## Reference for Pygame
+
+1. https://app.readthedocs.org/projects/pygame/downloads/pdf/latest/
+
+2. https://www.tutorialspoint.com/pygame/pygame_tutorial.pdf5.
+
+3. Other online sources from the internet
 
 ---
 
