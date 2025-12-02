@@ -16,9 +16,26 @@ from config import (
 
 
 class Skier(pygame.sprite.Sprite):
-    """Player-controlled skier sprite with visible skis and poles."""
+    """
+    Player-controlled skier sprite with visible skis and poles.
+    Attribute:
+    
+        image: pygame.Surface
+            The visual representation of the skier.
+        rect: pygame.Rect
+            The rectangular boundary is used for positioning and collision.
+        speed_x: float
+            Horizontal movement speed.
+        move_speed: float
+            Base movement speed for the skier.
+    """
 
     def __init__(self) -> None:
+        """
+        Initialize the skier sprite with skis, body, head, and poles.
+        No parameter and return here.
+        """
+        
         super().__init__()
         width, height = 40, 50
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -54,7 +71,10 @@ class Skier(pygame.sprite.Sprite):
         self.move_speed: float = 6.0
 
     def update(self) -> None:
-        """Update the skier position based on keyboard input."""
+        """
+        Update the skier position based on keyboard input.
+        No parameter and return here.
+        """
         keys = pygame.key.get_pressed()
         self.speed_x = 0.0
 
@@ -73,9 +93,25 @@ class Skier(pygame.sprite.Sprite):
 
 
 class Obstacle(pygame.sprite.Sprite):
-    """Tree or rock that the skier must avoid."""
+    """
+    Tree or rock that the skier must avoid
+        Attribute:       
+            image: pygame.Surface
+                The visual representation of the obstacle.
+            rect: pygame.Rect
+                The rectangular boundary for positioning and collision.
+            speed_y: float
+                Vertical movement speed.
+    """
 
     def __init__(self, speed_y: float) -> None:
+        """
+        Initialize an obstacle sprite as either a tree or rock.
+        Parameters:
+            speed_y: float
+                The downward movement speed of the obstacle.      
+        Returns: None
+        """
         super().__init__()
         width, height = 32, 48
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -117,16 +153,35 @@ class Obstacle(pygame.sprite.Sprite):
         self.speed_y: float = speed_y
 
     def update(self) -> None:
-        """Move the obstacle down the slope and remove it when it leaves the screen."""
+        """
+        Move the obstacle down the slope and remove it when it leaves the screen.
+        No parameter and return here.
+        """
         self.rect.y += int(self.speed_y)
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
 
 
 class Flag(pygame.sprite.Sprite):
-    """Collectible flag sprite that gives bonus score."""
+    """
+    Collectible flag sprite that gives a bonus score.
+        Attribute:
+        image: pygame.Surface
+            The visual representation of the flag.
+        rect: pygame.Rect
+            The rectangular boundary for positioning and collision.
+        speed_y: float
+            Vertical movement speed.
+    """
 
     def __init__(self, speed_y: float) -> None:
+        """ 
+        Initialize a flag sprite with pole and yellow cloth.
+        Parameters:
+            speed_y: float
+                The downward movement speed of the flag.
+        No return. 
+        """
         super().__init__()
         width, height = 18, 36
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -152,16 +207,35 @@ class Flag(pygame.sprite.Sprite):
         self.speed_y: float = speed_y
 
     def update(self) -> None:
-        """Move the flag down the slope and remove it when it leaves the screen."""
+        """
+        Move the flag down the slope and remove it when it leaves the screen.
+        No parameter and return here.
+        """
         self.rect.y += int(self.speed_y)
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
 
 
 class Rescuee(pygame.sprite.Sprite):
-    """Person stuck in the snow that the skier can rescue."""
+    """
+    Person stuck in the snow that the skier can rescue.
+        Attributes
+        image: pygame.Surface
+            The visual representation of the person.
+        rect: pygame.Rect
+            The rectangular boundary for positioning and collision.
+        speed_y: float
+            Vertical movement speed.
+    """
 
     def __init__(self, speed_y: float) -> None:
+        """
+        Initialize a rescuee sprite with snow mound and red jacket.
+        Parameters:
+            speed_y: float
+                The downward movement speed of the rescuee.
+        No return.
+        """
         super().__init__()
         width, height = 30, 34
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -206,7 +280,10 @@ class Rescuee(pygame.sprite.Sprite):
         self.speed_y: float = speed_y * 0.9
 
     def update(self) -> None:
-        """Move the rescuee down the slope and remove it when it leaves the screen."""
+        """
+        Move the rescuee down the slope and remove it when it leaves the screen.
+        No parameter and return.
+        """
         self.rect.y += int(self.speed_y)
         if self.rect.top > SCREEN_HEIGHT:
             self.kill()
