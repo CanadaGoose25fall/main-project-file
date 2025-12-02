@@ -2,6 +2,9 @@
 
 A simple 2D skiing game built with Python and Pygame for our programming course project.
 
+## Designers of Game: Yuan Ma， Junjia Zeng
+
+
 ## What This Game Does
 
 You control a skier going down a snowy mountain. Your goal is to:
