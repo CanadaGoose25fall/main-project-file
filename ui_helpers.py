@@ -12,7 +12,26 @@ def draw_text_center(
     color: Tuple[int, int, int],
     center: Tuple[int, int],
 ) -> None:
-    """Render text and draw it centered at the given position."""
+    """
+    Render text and draw it centered at the given position.
+    
+    **Parameters**
+    
+        screen: *pygame.Surface*
+            The surface to draw on.
+        text: *str*
+            The text string to render.
+        font: *pygame.font.Font*
+            The font object to use.
+        color: *Tuple[int, int, int]*
+            RGB color tuple.
+        center: *Tuple[int, int]*
+            The (x, y) position to center the text at.
+            
+    **Returns**
+    
+        None
+    """
     surface = font.render(text, True, color)
     rect = surface.get_rect(center=center)
     screen.blit(surface, rect)
@@ -25,14 +44,41 @@ def draw_text_topleft(
     color: Tuple[int, int, int],
     topleft: Tuple[int, int],
 ) -> None:
-    """Render text and draw it with the given top-left coordinate."""
+    """
+    Render text and draw it with the given top-left coordinate.
+        
+    **Parameters**
+    
+        screen: *pygame.Surface*
+            The surface to draw on.
+        text: *str*
+            The text string to render.
+        font: *pygame.font.Font*
+            The font object to use.
+        color: *Tuple[int, int, int]*
+            RGB color tuple.
+        topleft: *Tuple[int, int]*
+            The (x, y) position for the top-left corner.
+            
+    **Returns**
+    
+        None
+    """
     surface = font.render(text, True, color)
     rect = surface.get_rect(topleft=topleft)
     screen.blit(surface, rect)
 
 
 def create_tree_sprite() -> pygame.Surface:
-    """Create a tree sprite for tutorial."""
+    """
+    Create a tree sprite for tutorial display.
+    
+    **Parameters： None
+        
+    **Returns**
+        surface: *pygame.Surface*
+            A surface with a tree drawn on it.
+    """
     width, height = 32, 48
     surface = pygame.Surface((width, height), pygame.SRCALPHA)
     surface.fill((0, 0, 0, 0))
@@ -54,8 +100,14 @@ def create_tree_sprite() -> pygame.Surface:
     return surface
 
 
-def create_rock_sprite() -> pygame.Surface:
-    """Create a rock sprite for tutorial."""
+def create_rock_sprite() -> pygame.Surface：
+    """
+    Create a rock sprite for tutorial.
+    No parameter. 
+    Returns
+        surface: *pygame.Surface*
+            A surface with a rock drawn on it.
+    """
     width, height = 32, 48
     surface = pygame.Surface((width, height), pygame.SRCALPHA)
     surface.fill((0, 0, 0, 0))
@@ -73,7 +125,12 @@ def create_rock_sprite() -> pygame.Surface:
 
 
 def create_flag_sprite() -> pygame.Surface:
-    """Create a flag sprite for tutorial."""
+    """
+    Create a flag sprite for tutorial.
+    no parameter
+    return surface: *pygame.Surface*
+            A surface with a flag drawn on it.
+    """
     width, height = 18, 36
     surface = pygame.Surface((width, height), pygame.SRCALPHA)
     surface.fill((0, 0, 0, 0))
@@ -92,7 +149,13 @@ def create_flag_sprite() -> pygame.Surface:
 
 
 def create_rescuee_sprite() -> pygame.Surface:
-    """Create a rescuee sprite for tutorial."""
+    """
+    Create a rescuee sprite for tutorial.
+    No parameter
+    Returns:
+        surface: *pygame.Surface*
+            A surface with a person in need drawn on it.
+    """
     width, height = 30, 34
     surface = pygame.Surface((width, height), pygame.SRCALPHA)
     surface.fill((0, 0, 0, 0))
