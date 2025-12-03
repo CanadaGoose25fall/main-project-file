@@ -19,7 +19,19 @@ def draw_scrolling_background(
     snowflakes: list,
     scroll_speed: float
 ) -> None:
-    """Draw a scrolling snow slope with lane markers, mountains, and falling snow."""
+    """
+    Draw a scrolling snow slope with lane markers, mountains, and falling snow.
+    Parameters
+        screen: pygame.Surface
+            The game screen surface to draw on.
+        background_offset: float
+            Current scroll position for animating lane markers.
+        snowflakes: list
+            List of snowflake positions to animate.
+        scroll_speed: float
+            The speed at which elements scroll down.
+    Return： none
+    """
     screen.fill(SKY_BLUE)
     snow_top = SCREEN_HEIGHT // 4
 
