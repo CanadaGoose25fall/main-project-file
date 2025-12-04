@@ -1,7 +1,7 @@
 canadagoose/ 
 │ 
-├── main.py #  
-├── game.py #  
+├── main.py   
+├── game.py 
 ├── ui_helpers.py  
 ├── game_screens.py  
 ├── background.py 
