@@ -11,5 +11,5 @@ canadagoose/
 ├── highscores.txt  
 │ 
 └── tests/ 
-    ├── __init__.py 
-    └── test_highscore.py
+      ├── __init__.py 
+      └── test_highscore.py
