@@ -28,12 +28,64 @@ from sprites import Skier, Obstacle, Flag, Rescuee
 from game_screens import draw_menu, draw_tutorial, draw_game_over
 from background import draw_scrolling_background
 from ui_helpers import draw_text_topleft
-
+from ui_helpers import draw_text_center
 
 class Game:
-    """Encapsulates the skiing game state and main loop."""
+    """
+    Encapsulates the skiing game state and main loop
+    
+    Attributes
+        screen: pygame.Surface
+            The main game window surface.
+        clock: pygame.time.Clock
+            Clock for controlling frame rate.
+        fonts: dict
+            Dictionary containing different sized fonts.
+        running: bool
+            Whether the game is still running.
+        state: str
+            Current game state (MENU, TUTORIAL, PLAYING, GAME_OVER).
+        difficulty_key: str
+            Currently selected difficulty level.
+        all_sprites: pygame.sprite.Group
+            Group containing all game sprites.
+        obstacles: pygame.sprite.Group
+            Group containing obstacle sprites.
+        flags: pygame.sprite.Group
+            Group containing flag sprites.
+        rescuees: pygame.sprite.Group
+            Group containing rescuee sprites.
+        skier: Skier
+            The player character sprite.
+        score: int
+            Current game score.
+        lives: int
+            Current number of lives remaining.
+        rescued_count: int
+            Total people rescued.
+        frame_count: int
+            Total frames elapsed.
+        seconds_elapsed: int
+            Total seconds elapsed in game.
+        scroll_speed: float
+            Current background scroll speed.
+        obstacle_spawn_rate: int
+            Frames between obstacle spawns.
+        flag_spawn_rate: int
+            Frames between flag spawns.
+        rescue_spawn_rate: int
+            Frames between rescuee spawns.
+        paused: bool
+            Whether the game is paused.
+        snowflakes: list
+            List of snowflake positions for visual effect.
+    """
 
     def __init__(self) -> None:
+        '''
+        Initialize the game with pygame, screen, fonts, and default values.
+        No parameter and return
+        '''
         pygame.init()
         pygame.display.set_caption("Ski Patrol Adventure")
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -85,6 +137,10 @@ class Game:
         self.reset_game_state()
 
     def reset_game_state(self) -> None:
+        '''
+        Create all sprite groups and reset score, lives, and timers.
+        No parameter and return
+        '''
         """Create all sprite groups and reset score, lives, and timers."""
         self.all_sprites = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
@@ -106,14 +162,20 @@ class Game:
         self.apply_difficulty_settings()
 
     def apply_difficulty_settings(self) -> None:
-        """Apply the currently selected difficulty settings."""
+        """
+        Apply the currently selected difficulty settings.
+        No parameter and return.
+        """
         settings = DIFFICULTY_LEVELS[self.difficulty_key]
         self.scroll_speed = settings.scroll_speed
         self.obstacle_spawn_rate = settings.obstacle_spawn_rate
         self.flag_spawn_rate = settings.flag_spawn_rate
 
     def run(self) -> None:
-        """Main high-level game loop that switches between states."""
+        """
+        Main high-level game loop that switches between states.
+        No parameter and return.
+        """
         while self.running:
             if self.state == "MENU":
                 self.menu_loop()
@@ -128,7 +190,10 @@ class Game:
 
     # ===== MENU STATE =====
     def menu_loop(self) -> None:
-        """Handle events and drawing for the main menu."""
+        """
+        Handle events and drawing for the main menu.
+        No parameter and return.
+        """
         in_menu = True
         while in_menu and self.running:
             self.clock.tick(FPS)
@@ -155,7 +220,10 @@ class Game:
 
     # ===== TUTORIAL STATE =====
     def tutorial_loop(self) -> None:
-        """Handle events and drawing for the tutorial screen."""
+        """
+        Handle events and drawing for the tutorial screen.
+        No parameter and return.
+        """
         in_tutorial = True
         while in_tutorial and self.running and self.state == "TUTORIAL":
             self.clock.tick(FPS)
@@ -175,7 +243,10 @@ class Game:
 
     # ===== PLAYING STATE =====
     def play_loop(self) -> None:
-        """Main gameplay loop."""
+        """
+        Main gameplay loop.
+        No parameter and return.
+        """
         playing = True
         while playing and self.running and self.state == "PLAYING":
             dt = self.clock.tick(FPS) / 1000.0
@@ -195,7 +266,10 @@ class Game:
                 playing = False
 
     def handle_play_events(self) -> None:
-        """Handle keyboard events during gameplay."""
+        """
+        Handle keyboard events during gameplay.
+        No parameter and return.
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -208,7 +282,13 @@ class Game:
                     self.paused = not self.paused
 
     def update_game_state(self, dt: float) -> None:
-        """Update all game logic."""
+        """
+        Update all game logic.
+        Parameters
+            dt: float
+                Time delta in seconds since last frame.
+        Returns: none
+        """
         self.frame_count += 1
         self.seconds_elapsed = self.frame_count // FPS
 
@@ -236,7 +316,10 @@ class Game:
         self.handle_collisions()
 
     def spawn_sprites(self) -> None:
-        """Spawn obstacles, flags, and rescue targets."""
+        """
+        Spawn obstacles, flags, and rescue targets.
+        No parameter and return.
+        """
         if self.frame_count % self.obstacle_spawn_rate == 0:
             obstacle = Obstacle(speed_y=self.scroll_speed)
             self.all_sprites.add(obstacle)
@@ -255,7 +338,10 @@ class Game:
                     self.rescuees.add(rescuee)
 
     def increase_difficulty(self) -> None:
-        """Increase scroll speed and spawn frequencies."""
+        """
+        Increase scroll speed and spawn frequencies.
+        No parameter and return.
+        """
         self.scroll_speed *= SCROLL_SPEED_MULTIPLIER
         self.obstacle_spawn_rate = max(15, int(self.obstacle_spawn_rate * SPAWN_RATE_MULTIPLIER))
         self.flag_spawn_rate = max(20, int(self.flag_spawn_rate * SPAWN_RATE_MULTIPLIER))
@@ -265,7 +351,10 @@ class Game:
         )
 
     def handle_collisions(self) -> None:
-        """Check for all sprite collisions."""
+        """
+        Check for all sprite collisions.
+        No parameter and return.
+        """
         # Obstacles
         hits = pygame.sprite.spritecollide(self.skier, self.obstacles, True)
         if hits:
@@ -286,7 +375,13 @@ class Game:
                 self.lives = min(MAX_LIVES, self.lives + 1)
 
     def draw_play(self, paused: bool = False) -> None:
-        """Draw the gameplay screen."""
+        """
+        Draw the gameplay screen.
+        Parameters
+            paused: bool, optional
+                Whether to show the pause overlay.
+        No Return 
+        """
         draw_scrolling_background(
             self.screen,
             self._background_offset,
@@ -305,7 +400,10 @@ class Game:
         pygame.display.flip()
 
     def draw_hud(self) -> None:
-        """Draw the heads-up display."""
+        """
+        Draw the heads-up display.
+        No parameter and return.
+        """
         draw_text_topleft(
             self.screen,
             f"Score: {self.score}",
@@ -343,8 +441,10 @@ class Game:
         )
 
     def draw_pause_overlay(self) -> None:
-        """Draw the pause screen overlay."""
-        from ui_helpers import draw_text_center
+        """
+        Draw the pause screen overlay.
+        No parameter and return.
+        """
         
         overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
         overlay.fill((0, 0, 0, 140))
@@ -367,7 +467,10 @@ class Game:
 
     # ===== GAME OVER STATE =====
     def game_over_loop(self) -> None:
-        """Handle events and drawing for game over screen."""
+        """
+        Handle events and drawing for game over screen.
+        No parameter and return.
+        """
         is_high = is_new_high_score(self.score)
         high_score = load_high_score()
 
