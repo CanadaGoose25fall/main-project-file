@@ -26,7 +26,15 @@ from ui_helpers import (
 
 
 def draw_menu(screen: pygame.Surface, fonts: dict) -> None:
-    """Draw the main menu screen."""
+    """
+    Draw the main menu screen.
+    Parameters
+        screen: pygame.Surface
+            The game screen surface to draw on.
+        fonts: dict
+            Dictionary of font objects for different text sizes.
+    Returns: None
+    """
     screen.fill(DARK_GRAY)
 
     draw_text_center(
@@ -95,7 +103,15 @@ def draw_menu(screen: pygame.Surface, fonts: dict) -> None:
 
 
 def draw_tutorial(screen: pygame.Surface, fonts: dict) -> None:
-    """Draw the tutorial screen with game element examples."""
+    """
+    Draw the tutorial screen with examples of game elements.
+    Parameters
+        screen: pygame.Surface
+            The game screen surface to draw on.
+        fonts: dict
+            Dictionary of font objects for different text sizes.
+    No Returns
+    """
     screen.fill(DARK_GRAY)
 
     draw_text_center(
@@ -180,7 +196,25 @@ def draw_tutorial_item(
     sprite_surface: pygame.Surface,
     highlight_color: Tuple[int, int, int]
 ) -> None:
-    """Draw a single tutorial item with sprite and text."""
+    """
+    Draw a single tutorial item with sprite and text.
+    Parameters
+        screen: pygame.Surface
+            The game screen surface to draw on.
+        fonts: dict
+            Dictionary of font objects for different text sizes.
+        y_pos: int
+            Vertical position for this tutorial item.
+        title: str
+            Title text for this game element.
+        description: str
+            Description text explaining what this element does.
+        sprite_surface: pygame.Surface
+            The visual representation of the game element.
+        highlight_color: Tuple[int, int, int]
+            RGB color for the border around the sprite.
+    No returns
+    """
     sprite_x = 100
     screen.blit(sprite_surface, (sprite_x, y_pos - sprite_surface.get_height() // 2))
     
