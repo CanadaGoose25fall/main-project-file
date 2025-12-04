@@ -48,6 +48,5 @@ def test_is_new_high_score(tmp_path) -> None:
     assert is_new_high_score(200, path=path) is True
     assert is_new_high_score(50, path=path) is False
     assert is_new_high_score(100, path=path) is False  
-
     assert is_new_high_score(100, path=path) is True
     assert is_new_high_score(10, path=path) is False
