@@ -100,7 +100,7 @@ def create_tree_sprite() -> pygame.Surface:
     return surface
 
 
-def create_rock_sprite() -> pygame.Surface：
+def create_rock_sprite() -> pygame.Surface:
     """
     Create a rock sprite for tutorial.
     No parameter. 
