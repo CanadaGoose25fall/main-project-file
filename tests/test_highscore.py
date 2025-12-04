@@ -1,7 +1,6 @@
 """Simple unit tests for the high-score helper functions."""
 
 from pathlib import Path
-
 from highscore import load_high_score, save_high_score, is_new_high_score
 
 
