@@ -141,7 +141,6 @@ class Game:
         Create all sprite groups and reset score, lives, and timers.
         No parameter and return
         '''
-        """Create all sprite groups and reset score, lives, and timers."""
         self.all_sprites = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
         self.flags = pygame.sprite.Group()
