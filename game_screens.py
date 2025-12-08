@@ -119,11 +119,11 @@ def draw_tutorial(screen: pygame.Surface, fonts: dict) -> None:
         "How to Play",
         fonts['large'],
         WHITE,
-        (SCREEN_WIDTH // 2, 60),
+        (SCREEN_WIDTH // 2, 50),
     )
 
-    start_y = 140
-    item_spacing = 120
+    start_y = 120
+    item_spacing = 105
 
     # Tree obstacle
     draw_tutorial_item(
@@ -174,14 +174,14 @@ def draw_tutorial(screen: pygame.Surface, fonts: dict) -> None:
         "Press SPACE or ENTER to start playing",
         fonts['medium'],
         (255, 215, 0),
-        (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60),
+        (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 50),
     )
     draw_text_center(
         screen,
         "Press ESC to return to menu",
         fonts['small'],
         GRAY,
-        (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 25),
+        (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 20),
     )
 
     pygame.display.flip()
@@ -236,14 +236,14 @@ def draw_tutorial_item(
         title,
         fonts['medium'],
         WHITE,
-        (200, y_pos - 25)
+        (200, y_pos - 30)
     )
     draw_text_topleft(
         screen,
         description,
         fonts['small'],
         GRAY,
-        (200, y_pos + 10)
+        (200, y_pos + 5)
     )
 
 
@@ -286,7 +286,7 @@ def draw_game_over(
             "New High Score!",
             fonts['medium'],
             (255, 215, 0),
-            (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4 + 160),
+            (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4 + 110),
         )
     else:
         draw_text_center(
