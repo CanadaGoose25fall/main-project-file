@@ -46,7 +46,7 @@ MOUNTAIN_GRAY = (200, 210, 220)
 
 # Player and game stats
 STARTING_LIVES: int = 3
-MAX_LIVES: int = 5
+MAX_LIVES: int = 3
 
 # File used for storing high scores
 HIGH_SCORE_FILE: str = "highscores.txt"
